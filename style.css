@@ -19,6 +19,7 @@ html{
 }
 body{
     color: var(--white-color);
+
 }
 header{
     position: fixed;
@@ -565,10 +566,10 @@ overflow: visible;
 .results-box {
     margin: 20px auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 2px solid var(--main-color);
     background-color: var(--second-bg-color);
     width: 80%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px var(--main-color);
     border-radius: 8px;
     color: black;
     font-size: 20px;
@@ -577,10 +578,10 @@ overflow: visible;
 .login-box{
     margin: 20px auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    border:   2px solid var(--main-color);
     background-color: var(--second-bg-color);
     width: 400px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px var(--main-color);
     border-radius: 8px;
 }
 
@@ -658,6 +659,10 @@ td {
     display: flex;
     justify-content: space-around;
 }
+#message{
+    font-size: 15px;
+    margin-top: 5px;
+}
 
 /*blog css*/
 .blog-container{
@@ -675,11 +680,16 @@ td {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     
 }
 .blog-tv h1{
     font-size: 30px;
    
+}
+.live-channel{
+    width: 580px;
+    height: 330px;
 }
 
 
@@ -728,6 +738,10 @@ td {
         width: 500px;
         height: 300px;
     }
+    .live-channel{
+        width: 480px;
+        height: 280px;
+    }
 
     
 }
@@ -759,6 +773,11 @@ td {
     .blog-tv{
         width: 350px;
         height: 250px;
+    }
+    .live-channel{
+        width:330px ;
+        height: 230px;
+    
     }
     nav{
         position: absolute;
@@ -867,9 +886,13 @@ td {
         font-size: 50%;
     }
     .blog-tv{
-        width: 230px;
-        height: 150px;
+        width: 250px;
+        height: 200px;
         
+    }
+    .live-channel{
+        width: 220px;
+        height: 180px;
     }
     .blog-tv h1{
         font-size: 20px;

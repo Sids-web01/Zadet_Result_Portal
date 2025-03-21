@@ -85,143 +85,116 @@
     })
  })
 
+
+ const scriptURL = "https://script.google.com/macros/s/AKfycbxGi7xqvWaS06Jceo49u1UPcpbIM9iPfSlHwLz0jWSTnEie1sSIvGpqdQO-y1c3EgPy/exec"; // Add your Google Apps Script URL
+
+ async function checkResult() {
+     const userID = document.getElementById("studentID").value.trim();
+     const userPass = document.getElementById("studentPass").value.trim();
+     const message = document.getElementById("message");
  
-// Hardcoded student data (ID, Password, Details, and Results)
-const studentData = {
-    "SID001": {
-        password: "1234",
-        image: "main.jpg",
-        details: {
-            name: "Abu Bakarr Sidique kamara",
-            class: "SSS 3",
-            age: 17,
-            gender: "Male",
-            teacher: "Mrs. Thompson",
-            guardian: "Mr Kamara",
-            contact: "079 63 02 74",
-            remarks: "Excellent performance in Term 2."
-        },
-        results: {
-            term1Position: 2,
-            term2Position: 1,
-            term3Position: 1,
-            subjects: {
-                Math: { term1: 85, term2: 88, term3: 90 },
-                English: { term1: 90, term2: 92, term3: 91 },
-                Science: { term1: 80, term2: 84, term3: 87 },
-                History: { term1: 88, term2: 89, term3: 91 },
-                Geography: { term1: 75, term2: 78, term3: 80 },
-                Art: { term1: 88, term2: 90, term3: 92 },
-                Music: { term1: 70, term2: 75, term3: 80 },
-                PE: { term1: 90, term2: 92, term3: 94 },
-                French: { term1: 78, term2: 82, term3: 85 },
-                IT: { term1: 82, term2: 85, term3: 88 },
-                Civics: { term1: 88, term2: 89, term3: 90 },
-                Business: { term1: 92, term2: 95, term3: 98 },
-                Chemistry: { term1: 76, term2: 79, term3: 80 }
-            }
-        }
-    },
-    "SID002": {
-        password: "12345",
-        image: "vibebg5.jpeg",
-        details: {
-            name: "Abu Bakarr Sidique kamara",
-            class: "SSS 3",
-            age: 17,
-            gender: "Male",
-            teacher: "Mrs. Thompson",
-            guardian: "Mr Kamara",
-            contact: "079 63 02 74",
-            remarks: "Excellent performance in Term 2."
-        },
-        results: {
-            term1Position: 2,
-            term2Position: 1,
-            term3Position: 1,
-            subjects: {
-                Math: { term1: 85, term2: 88, term3: 90 },
-                English: { term1: 90, term2: 92, term3: 91 },
-                Science: { term1: 80, term2: 84, term3: 87 },
-                History: { term1: 88, term2: 89, term3: 91 },
-                Geography: { term1: 75, term2: 78, term3: 80 },
-                Art: { term1: 88, term2: 90, term3: 92 },
-                Music: { term1: 70, term2: 75, term3: 80 },
-                PE: { term1: 90, term2: 92, term3: 94 },
-                French: { term1: 78, term2: 82, term3: 85 },
-                IT: { term1: 82, term2: 85, term3: 88 },
-                Civics: { term1: 88, term2: 89, term3: 90 },
-                Business: { term1: 92, term2: 95, term3: 98 },
-                Chemistry: { term1: 76, term2: 79, term3: 80 }
-            }
-        }
-    }
+     if (!userID || !userPass) {
+         message.textContent = "Please enter both ID and Password.";
+         return;
+     }
+ 
+     try {
+         const response = await fetch(scriptURL);
+         const data = await response.json();
+ 
+         console.log("Fetched Data:", data);  // ✅ DEBUG: Check fetched data
+ 
+         if (!Array.isArray(data)) {
+             message.textContent = "Data format error. Check Google Sheets structure.";
+             console.error("Unexpected Data Format:", data);
+             return;
+         }
+ 
+         // ✅ Find matching student
+         let matchedUser = data.find(user => 
+             String(user.ID).trim() === userID && String(user.Password).trim() === userPass
+         );
+ 
+         console.log("Matched User:", matchedUser);  // ✅ DEBUG: Check matched user
+ 
+         if (matchedUser) {
+             displayResults(matchedUser); // ✅ Show student results
+         } else {
+             message.textContent = "Incorrect ID or Password. Please try again.";
+         }
+     } catch (error) {
+         console.error("Error fetching data:", error);
+         message.textContent = "Error fetching data. Try again later.";
+     }
+ }
+ 
+ function displayResults(student) {
+     document.querySelector(".login-box").style.display = "none";
+     document.querySelector(".results-box").style.display = "block";
+ 
+     document.getElementById("studentDetails").innerHTML = `
+         <p><strong>Name:</strong> ${student.Name}</p>
+         <p><strong>Gender:</strong> ${student.Gender}</p>
+         <p><strong>ID:</strong> ${student.ID}</p>
+         <p><strong>Class:</strong> ${student.Class}</p>
+         <p><strong>Guardian:</strong> ${student.Guardian}</p>
+         <p><strong>Teacher:</strong> ${student.Teacher}</p>
+         <p><strong>Contact:</strong> ${student.Contact}</p>
+     `;
+ 
+     // ✅ Fix for Google Drive Image Links
+     const studentImage = student.Image ? student.Image.trim() : "";
+     let driveImageURL = studentImage.includes("drive.google.com")
+         ? studentImage.replace("https://drive.google.com/file/d/", "https://lh3.googleusercontent.com/d/")
+                      .replace("/view?usp=drive_link", "")
+         : studentImage;
+ 
+     document.getElementById("studentImage").innerHTML = driveImageURL
+         ? `<img src="${driveImageURL}" alt="Student Photo" class="student-photo">`
+         : `<p>No Image Available</p>`;
 
-};
+         console.log("Student Image URL:", student.Image);
 
-// Function to check student ID and password
-function checkResult() {
-    const studentID = document.getElementById("studentID").value.toUpperCase();
-    const studentPass = document.getElementById("studentPass").value;
-    const resultBox = document.querySelector(".results-box");
-    const loginBox = document.querySelector(".login-box");
-    const message = document.getElementById("message");
-    const studentImage = document.getElementById("studentImage");
-    const studentDetails = document.getElementById("studentDetails");
-    const resultsTable = document.getElementById("resultsTable");
-    const term1Position = document.getElementById("term1Position");
-    const term2Position = document.getElementById("term2Position");
-    const term3Position = document.getElementById("term3Position");
 
-    if (studentData[studentID] && studentData[studentID].password === studentPass) {
-        const student = studentData[studentID];
-        resultBox.style.display = "block";
-        loginBox.style.display = "none";
 
-        // Set student image
-        studentImage.src = student.image;
-
-        // Set student details
-        const details = student.details;
-        studentDetails.innerHTML = ` 
-            <p><strong>Name:</strong> ${details.name}</p>
-            <p><strong>Class:</strong> ${details.class}</p>
-            <p><strong>Age:</strong> ${details.age}</p>
-            <p><strong>Gender:</strong> ${details.gender}</p>
-            <p><strong>Class Teacher:</strong> ${details.teacher}</p>
-            <p><strong>Guardian:</strong> ${details.guardian}</p>
-            <p><strong>Contact:</strong> ${details.contact}</p>
-            <p><strong>Remarks:</strong> ${details.remarks}</p>
-        `;
-
-        // Set results table
-        resultsTable.innerHTML = "";
-        const subjects = student.results.subjects;
-        for (let subject in subjects) {
-            const result = subjects[subject];
-            const row = `<tr>
-                <td>${subject}</td>
-                <td>${result.term1}</td>
-                <td>${result.term2}</td>
-                <td>${result.term3}</td>
-            </tr>`;
-            resultsTable.innerHTML += row;
-        }
-
-        // Set term positions
-        term1Position.textContent = `Term 1 Position: ${student.results.term1Position}`;
-        term2Position.textContent = `Term 2 Position: ${student.results.term2Position}`;
-        term3Position.textContent = `Term 3 Position: ${student.results.term3Position}`;
-    } else {
-        message.textContent = "Invalid Student ID or Password. Please try again.";
-    }
-}
-
-// Function to go back to the login page
-function goBack() {
-    document.querySelector(".results-box").style.display = "none";
-    document.querySelector(".login-box").style.display = "block";
-    document.getElementById("studentID").value = "";
-    document.getElementById("studentPass").value = "";
-    document.getElementById("message").textContent = "";
-}
+ 
+     // Clear previous table content
+     const resultsTable = document.getElementById("resultsTable");
+     resultsTable.innerHTML = `
+         <tr>
+             <th>Subject</th>
+             <th>Term 1</th>
+             <th>Term 2</th>
+             <th>Term 3</th>
+         </tr>
+     `;
+ 
+     const subjects = [
+         "Math", "English", "Science", "Social Studies", "History",
+         "Geography", "Physics", "Chemistry", "Biology", "ICT",
+         "Religious Studies", "Physical Education", "Art"
+     ];
+ 
+     subjects.forEach(subject => {
+         if (student[`${subject} Term 1 Marks`]) {
+             resultsTable.innerHTML += `
+                 <tr>
+                     <td>${subject}</td>
+                     <td>${student[`${subject} Term 1 Marks`] || "-"}</td>
+                     <td>${student[`${subject} Term 2 Marks`] || "-"}</td>
+                     <td>${student[`${subject} Term 3 Marks`] || "-"}</td>
+                 </tr>
+             `;
+         }
+     });
+ 
+     document.getElementById("term1Position").textContent = `Term 1 Position: ${student["Term 1 Position"]}`;
+     document.getElementById("term2Position").textContent = `Term 2 Position: ${student["Term 2 Position"]}`;
+     document.getElementById("term3Position").textContent = `Term 3 Position: ${student["Term 3 Position"]}`;
+ }
+ 
+ function goBack() {
+     document.querySelector(".results-box").style.display = "none";
+     document.querySelector(".login-box").style.display = "block";
+ }
+ 
