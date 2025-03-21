@@ -78,6 +78,7 @@ nav a:hover, nav a.active{
     background: var(--bg-color);
     animation: hide-bars .5s ease-in-out both;
     animation-delay: calc(.1s *var(--i));
+    height: 100%;
    
 }
 @keyframes hide-bars{
