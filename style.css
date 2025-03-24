@@ -613,7 +613,7 @@ button:hover {
 }
 
 #studentImage {
-    width: 100%;  
+    width: 300px;  
     height: auto;
     display: flex;
     margin: 10px auto;
@@ -886,6 +886,76 @@ td {
     }
     .contact-box h2{
         font-size: 3.5rem;
+    }
+}
+
+@media screen and (max-width:395px){
+    #studentImage{
+        width: 250px;
+        height: auto;
+    }
+}
+
+@media screen and (max-width:390px){
+    #studentImage{
+        width: 250px;
+        height: auto;
+    }
+}
+
+@media screen and (max-width:385px){
+    #studentImage{
+        width: 250px;
+        height: auto;
+    }
+}
+
+@media screen and (max-width:380px){
+    #studentImage{
+        width: 250px;
+        height: auto;
+    }
+}
+
+@media screen and (max-width:375px){
+    #studentImage{
+        width: 250px;
+        height: auto;
+    }
+}
+
+@media screen and (max-width:370px){
+    #studentImage{
+        width: 250px;
+        height: auto;
+    }
+}
+
+@media screen and (max-width:360px){
+    #studentImage{
+        width: 210px;
+        height: auto;
+    }
+}
+
+@media screen and (max-width:355px){
+    #studentImage{
+        width: 230px;
+        height: auto;
+    }
+}
+
+@media screen and (max-width:350px){
+    #studentImage{
+        width: 250px;
+        height: auto;
+    }
+}
+
+@media screen and (max-width:330px){
+    #studentImage{
+        width: 210px;
+        height: auto;
     }
 }
 
