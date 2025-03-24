@@ -194,3 +194,8 @@ if (student.Image && student.Image.trim() !== "") {
     document.getElementById("term2Position").textContent = `Term 2 Position: ${student["Term 2 Position"] || "N/A"}`;
     document.getElementById("term3Position").textContent = `Term 3 Position: ${student["Term 3 Position"] || "N/A"}`;
 }
+
+function goBack() {
+    document.querySelector(".results-box").style.display = "none";
+    document.querySelector(".login-box").style.display = "block";
+}

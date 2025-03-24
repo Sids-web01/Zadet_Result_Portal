@@ -613,9 +613,9 @@ button:hover {
 }
 
 #studentImage {
-    width: 300px;  
-    height: 300px;
-    display: block;
+    max-width: 100%;  
+    height: auto;
+    display: flex;
     margin: 10px auto;
     border-radius: 20px;
 }
@@ -630,6 +630,9 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
+}
+.position-box{
+
 }
 
 table, th, td {
@@ -656,11 +659,14 @@ td {
 
 .position-box {
     margin-top: 10px;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
     color:var(--white-color);
     display: flex;
     justify-content: space-around;
+    gap: 10px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 #message{
     font-size: 15px;
@@ -765,10 +771,6 @@ td {
         width: 400px;
         height: 300px;
     }
-    .student-image{
-        width: 150px;
-        height: 150px;
-    }
 }
 @media screen and (max-width:768px) {
     #menu-icon{
@@ -859,15 +861,6 @@ td {
     section{
         min-height: 100vh;
     }
-    .student-image{
-        width: 150px;
-        height: 150px;
-    }
-    .position-box{
-        font-size: 1.8rem;
-        text-align: center;
-    }
-
 
 }
 
@@ -896,13 +889,6 @@ td {
         font-size: 3.5rem;
     }
 }
-@media screen and (max-width:350px){
-    #studentImage{
-        width: 200px;
-        height: 200px;
-    }
-
-}
 
 @media screen and (max-width:300px){
     html{
@@ -922,9 +908,5 @@ td {
     }
     section{
         min-height: 100vh;
-    }
-    .results-box{
-        
-        width: 100%;
     }
 }
