@@ -74,11 +74,10 @@ nav a:hover, nav a.active{
 }
 .bars-box .bar{
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background: var(--bg-color);
     animation: hide-bars .5s ease-in-out both;
     animation-delay: calc(.1s *var(--i));
-    
    
 }
 @keyframes hide-bars{
