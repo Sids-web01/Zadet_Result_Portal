@@ -74,12 +74,14 @@ nav a:hover, nav a.active{
 }
 .bars-box .bar{
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background: var(--bg-color);
     animation: hide-bars .5s ease-in-out both;
     animation-delay: calc(.1s *var(--i));
+    
    
 }
+
 @keyframes hide-bars{
     0%{
         transform: translateY(0);
@@ -610,13 +612,14 @@ button:hover {
     background-color: #0056b3;
 }
 
-.student-image {
-    width: 100px;
-    height: 100px;
-    border-radius: 10%;
-    margin-bottom: 20px;
-   
+#studentImage {
+    width: 300px;  
+    height: 300px;
+    display: block;
+    margin: 10px auto;
+    border-radius: 20px;
 }
+
 .imgbox{
     display: flex;
     justify-content: center;
@@ -762,6 +765,10 @@ td {
         width: 400px;
         height: 300px;
     }
+    .student-image{
+        width: 150px;
+        height: 150px;
+    }
 }
 @media screen and (max-width:768px) {
     #menu-icon{
@@ -852,6 +859,15 @@ td {
     section{
         min-height: 100vh;
     }
+    .student-image{
+        width: 150px;
+        height: 150px;
+    }
+    .position-box{
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
 
 }
 
@@ -880,6 +896,13 @@ td {
         font-size: 3.5rem;
     }
 }
+@media screen and (max-width:350px){
+    #studentImage{
+        width: 200px;
+        height: 200px;
+    }
+
+}
 
 @media screen and (max-width:300px){
     html{
@@ -899,5 +922,9 @@ td {
     }
     section{
         min-height: 100vh;
+    }
+    .results-box{
+        
+        width: 100%;
     }
 }
