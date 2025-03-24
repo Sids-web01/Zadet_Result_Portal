@@ -613,7 +613,7 @@ button:hover {
 }
 
 #studentImage {
-    max-width: 100%;  
+    width: 100%;  
     height: auto;
     display: flex;
     margin: 10px auto;
@@ -624,6 +624,7 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 
 table {
@@ -631,9 +632,7 @@ table {
     border-collapse: collapse;
     margin: 20px 0;
 }
-.position-box{
 
-}
 
 table, th, td {
     border: 1px solid #ccc;
