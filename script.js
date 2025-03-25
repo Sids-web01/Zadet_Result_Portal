@@ -61,7 +61,7 @@ logo.addEventListener('click', () => {
 
         navLinks[0].classList.add('active')
         setTimeout(() => {
-            sections[idx].classList.add('active')
+            sections[0].classList.add('active')
 
         }, 1100)
     }
@@ -84,6 +84,23 @@ resumebtns.forEach((btn, idx) => {
 
     })
 })
+
+const goToMenuBtn = document.querySelector('#homeBtn');
+
+// New button functionality to go to the Menu section
+goToMenuBtn.addEventListener('click', () => {
+    activiepage()  // Call the existing function to reset the active states
+
+    // Find the Menu section and add the 'active' class to it
+    const targetSection = document.querySelector('#contactsection')
+    targetSection.classList.add('active')
+
+    // Optionally, make the button active if you want
+    goToMenuBtn.classList.add('active')
+})
+
+// Select your 'Go to Order' button
+
 
 
 const scriptURL = "https://script.google.com/macros/s/AKfycbwC27zhUEcgscr9coIgc8M7XadpJjYvjagksgygqa-yDQQlGeUftGh9sSsHj5-Ag2j6/exec";
