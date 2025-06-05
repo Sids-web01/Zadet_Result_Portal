@@ -109,11 +109,15 @@ async function checkResult() {
     const userID = document.getElementById("studentID").value.trim();
     const userPass = document.getElementById("studentPass").value.trim();
     const message = document.getElementById("message");
+    const adminID = "admin123";        // Your special admin ID
+    const adminPassword = "password"; // Your special admin password
 
     if (!userID || !userPass) {
         message.textContent = "Please enter both ID and Password.";
         return;
     }
+    // Check if user is admin
+    
 
     try {
         const response = await fetch(scriptURL);
@@ -123,6 +127,10 @@ async function checkResult() {
             message.textContent = "Data format error. Check Google Sheets structure.";
             return;
         }
+        if (userID === adminID && userPass === adminPassword) {
+            // Redirect to admin page
+            window.location.href = "ADMIN.html";
+          } 
 
         let matchedUser = data.find(user => String(user.ID).trim() === userID && String(user.Password).trim() === userPass);
 
